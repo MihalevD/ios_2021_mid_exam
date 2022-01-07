@@ -8,8 +8,8 @@
 import UIKit
 
 class PhoneViewController: UIViewController {
-    var num: String = ""
-    var phoneName: String = ""
+    var num: String?
+    var phoneName: String?
     var agentImage: UIImage?
 
     @IBOutlet weak var number: UILabel!
@@ -20,8 +20,6 @@ class PhoneViewController: UIViewController {
         name.text = phoneName
         number.text = num
         imageview.image = agentImage
-
-        // Do any additional setup after loading the view.
     }
 
 }

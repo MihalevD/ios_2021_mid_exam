@@ -35,12 +35,22 @@ extension AgentsTableViewController {
 }
 extension AgentsTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let model = Model()
-        let agent = model.contacts[indexPath.row]
-        let vc = PhoneViewController()
-        vc.agentImage = UIImage(named: agent.photo)
-        vc.phoneName = agent.name
-        vc.num = "\(agent.phoneNumber.prefix) \(agent.phoneNumber.number)"
-        present(vc, animated: true)
+        self.performSegue(withIdentifier: "openAgent", sender: self)
+        
+    }
+}
+
+extension AgentsTableViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "openAgent"{
+            let model = Model()
+            let indexPath: IndexPath = tableView.indexPathForSelectedRow!
+            let agent = model.contacts[indexPath.row ?? .zero]
+            let vc = segue.destination as! PhoneViewController
+            vc.agentImage = UIImage(named: agent.photo)
+            vc.phoneName = agent.name
+            vc.num = "\(agent.phoneNumber.prefix) \(agent.phoneNumber.number)"
+            
+        }
     }
 }
